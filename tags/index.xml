@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Ilia thoughts</title>
+    <link>https://iliathoughts.com/tags/</link>
+    <description>Recent content in Tags on Ilia thoughts</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 06 Sep 2020 14:08:06 +1100</lastBuildDate>
+    
+	<atom:link href="https://iliathoughts.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>C&#43;&#43;</title>
+      <link>https://iliathoughts.com/tags/c&#43;&#43;/</link>
+      <pubDate>Sun, 06 Sep 2020 14:08:06 +1100</pubDate>
+      
+      <guid>https://iliathoughts.com/tags/c&#43;&#43;/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>emscripten</title>
+      <link>https://iliathoughts.com/tags/emscripten/</link>
+      <pubDate>Sun, 06 Sep 2020 14:08:06 +1100</pubDate>
+      
+      <guid>https://iliathoughts.com/tags/emscripten/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ray tracer</title>
+      <link>https://iliathoughts.com/tags/ray-tracer/</link>
+      <pubDate>Sun, 06 Sep 2020 14:08:06 +1100</pubDate>
+      
+      <guid>https://iliathoughts.com/tags/ray-tracer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ray tracer challenge</title>
+      <link>https://iliathoughts.com/tags/ray-tracer-challenge/</link>
+      <pubDate>Sun, 06 Sep 2020 14:08:06 +1100</pubDate>
+      
+      <guid>https://iliathoughts.com/tags/ray-tracer-challenge/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>webassembly</title>
+      <link>https://iliathoughts.com/tags/webassembly/</link>
+      <pubDate>Sun, 06 Sep 2020 14:08:06 +1100</pubDate>
+      
+      <guid>https://iliathoughts.com/tags/webassembly/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

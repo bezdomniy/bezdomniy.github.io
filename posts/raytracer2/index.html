@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en-us"><head>
+  <meta charset="utf-8" />
+  <meta name="description" content="A simple privacy oriented bootstrap hugo blog" />
+  <meta name="keywords" content="hugo, simple, minimal, bootstrap, blog" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href='https://iliathoughts.com/css/bootstrap.min.css'
+  />
+  <title>
+    Updated on my Ray Tracer
+  </title>
+  <nav class="navbar text-center sticky-top bg-white mt-2 mb-1">
+    <a href="https://iliathoughts.com"
+      ><span class="btn btn-sm btn-outline-primary">Home</span></a
+    >
+    <a href='https://iliathoughts.com/about'
+      ><span class="btn btn-sm btn-outline-secondary">About</span></a
+    >
+    <a href='https://iliathoughts.com/posts'
+      ><span class="btn btn-sm btn-outline-success">Blog</span></a
+    >
+    <a href='https://iliathoughts.com/tags'
+      ><span class="btn btn-sm btn-outline-warning">Tags</span></a
+    >
+  </nav>
+  
+</head>
+<body>
+      <div id="content">
+
+
+	<section class="container text-monospace text-justified mt-3">
+	  <h2>Updated on my Ray Tracer</h2>
+	  <small class="text-secondary mb-5">Posted on September 6, 2020 | 4 minute read</small>
+
+	  <p><p>My little ray tracer project has had a few improvements since my last post at the start of the year so I thought it would be good to do a new post on the progress.
+I have mainly been working on a native version using SDL2 for user input (moving the camera) and presentation. However the web version in my previous post was simply returning a list of RGB values which I would then draw directly to the canvas, and using the left-right buttons for input. Then I discovered that Emscripten has a port of SDL2 so I could use the same approach for the web version as for the native one.</p>
+<p>I also wanted the web version to be multithreaded. The simplest way to do this would be to use pthreads, however it seems that not all browsers implement the SharedArrayBuffer object required to make this work. So to make my ray tracer work on all modern web browsers, I used web workers (with no shared memory). How it works is that one worker parses and serialises the scene, then returns a scene binary, which is then distributed to the other web workers for rendering. Each worker renders 1/(number of possible CPU threads) rows of the scene. Keep in mine the first time you render something after loading the page, it will be a slower because the browser needs to create the web workers, and download the data for textures and 3D models.</p>
+<p>Since my last post I&rsquo;ve implemented texture mapping (see skybox and globe scenes), 3D models and bounding volume heirarchies (see Models scene). After rendering a scene you can click on the canvas, then use your keyobard arrow keys (up,down,left,right) of orbit the scene. I have preloaded a few scenes that you can find in the dropdown list. Also there are the following 3rd models located in /rayTracerModels:</p>
+<ul>
+<li>Stanford Armadillo (armadillo.obj)</li>
+<li>Stanford Dragon (dragon.obj)</li>
+<li>Stanford Bunny (bunny.obj)</li>
+<li>Porsche 911 (porsche.obj)</li>
+<li>Blender&rsquo;s Suzanne (suzanne.obj)</li>
+</ul>
+<p>You can use the syntax in the Models (hippy) scene to define a 3D model object and add it to your scene. Keep in mind this has a 3 models with tens of thousands of triangles so it will be slower to render than the other scenes. It takes about 30 seconds on my 4 core laptop. Just change the camera resolution in the YAML to something smaller to render it faster.</p>
+<p>So try it out below! I have done some but not a huge amount of error handling so just reload the page if anything breaks. I&rsquo;ll continue to work on this to make it better, but wanted to get it out there for people to try for now.</p>
+  <!DOCTYPE HTML>
+  <html>
+  <body>
+  <label>Select number of web workers: </label>
+<select id="coreSelect">
+</select>
+<br>
+  <textarea rows=15 cols=50 id="sceneTextArea">
+  </textarea>
+  <br>
+      <select id="scenes" onChange="return setScene()">
+          <option scene="0" value="Choose a scene">Choose a scene</option>
+          <option scene="1" value="/rayTracerScenes/reflectionScene.yaml">Reflections</option>
+          <option scene="1" value="/rayTracerScenes/tables.yaml">Table</option>
+          <option scene="2" value="/rayTracerScenes/groups.yaml">Groups</option>
+          <option scene="3" value="/rayTracerScenes/cylinders.yaml">Cylinders</option>
+          <option scene="4" value="/rayTracerScenes/hippy.yaml">Hippy</option>
+          <option scene="5" value="/rayTracerScenes/shadowPuppets.yaml">Shadow Puppets</option>
+          <option scene="6" value="/rayTracerScenes/coverScene.yaml">Cover Scene</option>
+          <option scene="7" value="/rayTracerScenes/christmas.yaml">Christmas</option>
+          <option scene="8" value="/rayTracerScenes/globe.yaml">Globe</option>
+          <option scene="9" value="/rayTracerScenes/skybox.yaml">Skybox</option>
+          <option scene="9" value="/rayTracerScenes/hippyModels.yaml">Models (Hippy)</option>
+      </select>
+      <button id="gobutton">go!</button>
+      <!-- <button id="testButton">test</button> -->
+  <br>
+  <button id="leftbutton">left</button>
+  <button id="rightbutton">right</button>
+  <br>
+  <canvas id="canvas" tabindex="1"></canvas>
+  <script id="jsscript" src="/js/Runner.js"></script>
+  <script>
+        //   Module['doNotCaptureKeyboard'] = true;
+        // Module['keyboardListeningElement'] = document.getElementById('canvas');
+      var textarea = document.getElementById("sceneTextArea");
+      var select = document.getElementById("coreSelect"); 
+      Module["onRuntimeInitialized"] = function () {
+          const logicalProcessors = window.navigator.hardwareConcurrency;
+            var options = Array.from(new Array(logicalProcessors), (x, i) => i + 1);
+            // console.log(options);
+            for(var i = 0; i < options.length; i++) {
+                var opt = options[i];
+                var el = document.createElement("option");
+                el.textContent = opt;
+                el.value = opt;
+                select.appendChild(el);
+            }
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+            // true for mobile device
+            select.selectedIndex = parseInt(logicalProcessors/2) - 1;
+            }else{
+            // false for not mobile device
+            select.selectedIndex = parseInt(logicalProcessors) - 1;
+            // document.write("not mobile device");
+            }
+          Module.canvas = (() => document.getElementById('canvas'))();
+          var goButton = document.getElementById("gobutton");
+          // var testButton = document.getElementById("testButton");
+          goButton.addEventListener(
+              "click", function() {
+              // Module._mainf(textarea.value);
+            //   const textCopy = textarea.value;
+            console.log(select.options[select.selectedIndex].value);
+              Module.ccall('draw', null, ["string","number"], [textarea.value,select.options[select.selectedIndex].value]);
+              // Module._test();
+          }
+          );
+          //   testButton.addEventListener(
+          //     "click", function() {
+          //     Module._killWorker();
+          //     }
+          // );
+          leftbutton.addEventListener(
+              "click", function() {
+              Module._moveLeft();
+              }
+          );
+          rightbutton.addEventListener(
+              "click", function() {
+              Module._moveRight();
+              }
+          );
+          document.getElementById('canvas').addEventListener(
+              "click", function() {
+                  document.getElementById('canvas').focus();
+                //   Module.ccall('getModel', null, ["string"], ["/rayTracerModels/donut.obj"]);
+              }
+          );
+      };
+      function setScene(){
+          // find the dropdown
+          var ddl = document.getElementById("scenes");
+          // find the selected option
+          var selectedOption = ddl.options[ddl.selectedIndex];
+          // find the attribute value
+          var sceneValue = selectedOption.getAttribute("value");
+          // find the textbox
+          var textBox = document.getElementById("sceneTextArea");
+          fetch(sceneValue)
+          .then(response => response.text())
+          .then((data) => {
+          textBox.value = data
+      })
+      }
+    //   var c = document.getElementById('canvas');
+    //   c.addEventListener('keydown',this.check,false);
+    //     function check(e) {
+    //         alert(e.keyCode);
+    //     }
+  </script>
+  </body>
+  </html>
+</p>
+
+	  <code>tags:<span class='badge badge-dark'><a class='text-white' href='https://iliathoughts.com/tags/ray%20tracer'>ray tracer</a></span>
+	  <span class='badge badge-dark'><a class='text-white' href='https://iliathoughts.com/tags/ray%20tracer%20challenge'>ray tracer challenge</a></span>
+	  <span class='badge badge-dark'><a class='text-white' href='https://iliathoughts.com/tags/webassembly'>webassembly</a></span>
+	  <span class='badge badge-dark'><a class='text-white' href='https://iliathoughts.com/tags/emscripten'>emscripten</a></span>
+	  <span class='badge badge-dark'><a class='text-white' href='https://iliathoughts.com/tags/c&#43;&#43;'>C&#43;&#43;</a></span>
+	  
+	  </code>
+	  <div class="container mt-2" id="comments">
+	    
+		<small class="mt-1">Please mail your comments to <a href="ilia.shibaev@protonmail.com">ilia.shibaev@protonmail.com</a></small><br>
+	    
+	  </div>
+	</section>
+
+
+
+      </div>
+  </body><footer>
+  <div class="container-fluid bg-dark text-white text-monospace text-center mt-4">
+    <small> | Crafted using <a href="https://gohugo.io">Hugo</a></small>
+  </div>
+  
+</footer>
+</html>
