@@ -3,9 +3,17 @@
         <title>Ilia thoughts</title>
         <link>https://iliathoughts.com/</link>
         <description>Ilia thoughts</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 06 Sep 2020 14:08:06 &#43;1100</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 27 Mar 2024 00:17:21 &#43;1100</lastBuildDate>
             <atom:link href="https://iliathoughts.com/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Particle Life in Rust</title>
+    <link>https://iliathoughts.com/posts/rust_particles/</link>
+    <pubDate>Wed, 27 Mar 2024 00:17:21 &#43;1100</pubDate>
+    <author>Author</author>
+    <guid>https://iliathoughts.com/posts/rust_particles/</guid>
+    <description><![CDATA[TODO
+<!DOCTYPE HTML> Load app! ]]></description>
+</item><item>
     <title>Updated on my Ray Tracer</title>
     <link>https://iliathoughts.com/posts/raytracer2/</link>
     <pubDate>Sun, 06 Sep 2020 14:08:06 &#43;1100</pubDate>

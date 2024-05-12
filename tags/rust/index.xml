@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Rust - Tag - Ilia thoughts</title>
+        <link>https://iliathoughts.com/tags/rust/</link>
+        <description>Rust - Tag - Ilia thoughts</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 27 Mar 2024 00:17:21 &#43;1100</lastBuildDate><atom:link href="https://iliathoughts.com/tags/rust/" rel="self" type="application/rss+xml" /><item>
+    <title>Particle Life in Rust</title>
+    <link>https://iliathoughts.com/posts/rust_particles/</link>
+    <pubDate>Wed, 27 Mar 2024 00:17:21 &#43;1100</pubDate>
+    <author>Author</author>
+    <guid>https://iliathoughts.com/posts/rust_particles/</guid>
+    <description><![CDATA[TODO
+<!DOCTYPE HTML> Load app! ]]></description>
+</item></channel>
+</rss>

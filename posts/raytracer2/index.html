@@ -5,20 +5,26 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>Updated on my Ray Tracer - Ilia thoughts</title><meta name="Description" content=""><meta property="og:title" content="Updated on my Ray Tracer" />
-<meta property="og:description" content="My little ray tracer project has had a few improvements since my last post at the start of the year so I thought it would be good to do a new post on the progress. I have mainly been working on a native version using SDL2 for user input (moving the camera) and presentation. However the web version in my previous post was simply returning a list of RGB values which I would then draw directly to the canvas, and using the left-right buttons for input." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://iliathoughts.com/posts/raytracer2/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-09-06T14:08:06+11:00" />
-<meta property="article:modified_time" content="2020-09-06T14:08:06+11:00" />
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Updated on my Ray Tracer"/>
-<meta name="twitter:description" content="My little ray tracer project has had a few improvements since my last post at the start of the year so I thought it would be good to do a new post on the progress. I have mainly been working on a native version using SDL2 for user input (moving the camera) and presentation. However the web version in my previous post was simply returning a list of RGB values which I would then draw directly to the canvas, and using the left-right buttons for input."/>
+        <title>Updated on my Ray Tracer - Ilia thoughts</title><meta name="Description" content=""><meta property="og:url" content="https://iliathoughts.com/posts/raytracer2/">
+  <meta property="og:site_name" content="Ilia thoughts">
+  <meta property="og:title" content="Updated on my Ray Tracer">
+  <meta property="og:description" content="My little ray tracer project has had a few improvements since my last post at the start of the year so I thought it would be good to do a new post on the progress. I have mainly been working on a native version using SDL2 for user input (moving the camera) and presentation. However the web version in my previous post was simply returning a list of RGB values which I would then draw directly to the canvas, and using the left-right buttons for input.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+  <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-09-06T14:08:06+11:00">
+    <meta property="article:modified_time" content="2020-09-06T14:08:06+11:00">
+    <meta property="article:tag" content="Ray Tracer">
+    <meta property="article:tag" content="Ray Tracer Challenge">
+    <meta property="article:tag" content="Webassembly">
+    <meta property="article:tag" content="Emscripten">
+    <meta property="article:tag" content="C&#43;&#43;">
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="Updated on my Ray Tracer">
+<meta name="twitter:description" content="My little ray tracer project has had a few improvements since my last post at the start of the year so I thought it would be good to do a new post on the progress. I have mainly been working on a native version using SDL2 for user input (moving the camera) and presentation. However the web version in my previous post was simply returning a list of RGB values which I would then draw directly to the canvas, and using the left-right buttons for input.">
 <meta name="application-name" content="Ilia thoughts">
 <meta name="apple-mobile-web-app-title" content="Ilia thoughts"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://iliathoughts.com/posts/raytracer2/" /><link rel="prev" href="https://iliathoughts.com/posts/raytracer/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://iliathoughts.com/posts/raytracer2/" /><link rel="prev" href="https://iliathoughts.com/posts/raytracer/" /><link rel="next" href="https://iliathoughts.com/posts/rust_particles/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -27,7 +33,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/iliathoughts.com\/posts\/raytracer2\/"
-        },"genre": "posts","keywords": "ray tracer, ray tracer challenge, webassembly, emscripten, C\u002b\u002b","wordcount":  648 ,
+        },"genre": "posts","keywords": "ray tracer, ray tracer challenge, webassembly, emscripten, C\u002b\u002b","wordcount":  473 ,
         "url": "https:\/\/iliathoughts.com\/posts\/raytracer2\/","datePublished": "2020-09-06T14:08:06+11:00","dateModified": "2020-09-06T14:08:06+11:00","publisher": {
             "@type": "Organization",
             "name": "Author"},"author": {
@@ -77,8 +83,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Updated on my Ray Tracer</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-09-06">2020-09-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;648 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-09-06">2020-09-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;473 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -228,13 +234,14 @@ I have mainly been working on a native version using SDL2 for user input (moving
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/ray-tracer/">ray tracer</a>,&nbsp;<a href="/tags/ray-tracer-challenge/">ray tracer challenge</a>,&nbsp;<a href="/tags/webassembly/">webassembly</a>,&nbsp;<a href="/tags/emscripten/">emscripten</a>,&nbsp;<a href="/tags/c&#43;&#43;/">C&#43;&#43;</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/ray-tracer/">Ray Tracer</a>,&nbsp;<a href="/tags/ray-tracer-challenge/">Ray Tracer Challenge</a>,&nbsp;<a href="/tags/webassembly/">Webassembly</a>,&nbsp;<a href="/tags/emscripten/">Emscripten</a>,&nbsp;<a href="/tags/c&#43;&#43;/">C&#43;&#43;</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/raytracer/" class="prev" rel="prev" title="Ray Tracer"><i class="fas fa-angle-left fa-fw"></i>Ray Tracer</a></div>
+    <div class="post-nav"><a href="/posts/raytracer/" class="prev" rel="prev" title="Ray Tracer"><i class="fas fa-angle-left fa-fw"></i>Ray Tracer</a>
+            <a href="/posts/rust_particles/" class="next" rel="next" title="Particle Life in Rust">Particle Life in Rust<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
             </main></div>
