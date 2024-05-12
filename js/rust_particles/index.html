@@ -121,7 +121,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
     </style>
 
 <link rel="modulepreload" href="/js/rust_particles/rust_particles.js" crossorigin=anonymous integrity="sha384-eUSThpu/3HZTe3Rmr9Lo7M4A3e7ru/24myVL+kxu8YzdQuMiDbRMhLG82cMhBvUa">
-<link rel="preload" href="/js/rust_particles/rust_particles_bg.wasm" crossorigin=anonymous integrity="sha384-vPXNfVjjMN1DbR/WqK7KzoJL063yquSIR5HDwxGUdHwrmF5/ertZDB+kSe+024db" as="fetch" type="application/wasm"></head>
+<link rel="preload" href="/js/rust_particles/rust_particles_bg.wasm" crossorigin=anonymous integrity="sha384-MYersjUgNtP43XVo1EhxpDJe8WZnksQYUDw4YvS1HXK3O44Vn2Unh9MAcdRjLO5N" as="fetch" type="application/wasm"></head>
 
 <body>
     <!-- The WASM code will resize the canvas dynamically -->
@@ -134,7 +134,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
         // We disable caching during development so that we always view the latest version.
         if ('serviceWorker' in navigator && window.location.hash !== "#dev") {
             window.addEventListener('load', function () {
-                navigator.serviceWorker.register('sw.js');
+                navigator.serviceWorker.register('/js/rust_particles/sw.js');
             });
         }
     </script>
