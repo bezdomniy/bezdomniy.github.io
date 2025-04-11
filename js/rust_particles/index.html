@@ -13,7 +13,7 @@
     
 <script type="module">
 import init, * as bindings from '/js/rust_particles/rust_particles.js';
-const wasm = await init('/js/rust_particles/rust_particles_bg.wasm');
+const wasm = await init({ module_or_path: '/js/rust_particles/rust_particles_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -63,15 +63,16 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
             width: 100%;
         }
 
-        /* Position canvas in center-top: */
+        /* Make canvas fill entire document: */
         canvas {
             margin-right: auto;
             margin-left: auto;
             display: block;
             position: absolute;
-            top: 0%;
-            left: 50%;
-            transform: translate(-50%, 0%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
 
         .centered {
@@ -117,16 +118,21 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
                 transform: rotate(360deg);
             }
         }
-
     </style>
-
-<link rel="modulepreload" href="/js/rust_particles/rust_particles.js" crossorigin=anonymous>
-<link rel="preload" href="/js/rust_particles/rust_particles_bg.wasm" crossorigin=anonymous as="fetch" type="application/wasm"></head>
+<link rel="modulepreload" href="/js/rust_particles/rust_particles.js" crossorigin="anonymous" integrity="sha384-0hv5sJu80cMZn9W6QEBn9grT3DLv0AuGr0mdoj+Z0qFrAucbEcGovLrs3XigC+lh"><link rel="preload" href="/rust_particles_bg.wasm" crossorigin="anonymous" integrity="sha384-3ytwazI/zW8gtMSVOhQYZu8BSNmZdsJtPMWQeiZ7fEQ3SIIbSMOKBCcNaqGcY3jR" as="fetch" type="application/wasm"></head>
 
 <body>
     <!-- The WASM code will resize the canvas dynamically -->
     <!-- the id is hardcoded in main.rs . so, make sure both match. -->
     <canvas id="canvas"></canvas>
+
+    <!-- the loading spinner will be removed in main.rs -->
+    <!-- <div class="centered" id="loading_text">
+        <p style="font-size:16px">
+            Loading…
+        </p>
+        <div class="lds-dual-ring"></div>
+    </div> -->
 
     <!--Register Service Worker. this will cache the wasm / js scripts for offline use (for PWA functionality). -->
     <!-- Force refresh (Ctrl + F5) to load the latest files instead of cached files  -->
