@@ -14,8 +14,11 @@ theme = "FixIt"
   fingerprint = "sha256"
   [params.footer]
     enable = false
-  [params.page.share]
-    Weibo = false
+  [params.page]
+    # No license notice under posts (FixIt defaults to CC BY-NC-SA 4.0)
+    license = ""
+    [params.page.share]
+      Weibo = false
   [params.home]
     [params.home.profile]
       enable = true
