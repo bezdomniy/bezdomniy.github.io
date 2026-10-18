@@ -1,6 +1,6 @@
 # Ilia thoughts
 
-Hugo source for https://blog.iliathoughts.com, using the [LoveIt](https://github.com/dillonzq/LoveIt) theme (git submodule).
+Hugo source for https://blog.iliathoughts.com, using the [FixIt](https://github.com/hugo-fixit/FixIt) theme (git submodule, pinned to a release tag).
 
 Pushing to `main` builds the site and deploys it to GitHub Pages
 (`.github/workflows/hugo.yml`). Built output is never committed.
@@ -10,10 +10,19 @@ Pushing to `main` builds the site and deploys it to GitHub Pages
 ```sh
 git clone --recurse-submodules https://github.com/bezdomniy/bezdomniy.github.io.git
 cd bezdomniy.github.io
-mise install          # installs the pinned Hugo (0.125.3, see mise.toml)
+mise install          # installs the pinned Hugo (see mise.toml)
 ```
 
-Hugo is pinned because LoveIt no longer builds on current Hugo releases.
+Hugo is pinned in `mise.toml` and the workflow so local and CI builds match; bump both together.
+
+## Updating the theme
+
+```sh
+git -C themes/FixIt fetch --tags
+git -C themes/FixIt checkout vX.Y.Z   # a release tag, see github.com/hugo-fixit/FixIt/releases
+hugo server                          # check it still looks right
+git commit -am "Update FixIt to vX.Y.Z"
+```
 
 ## Writing
 

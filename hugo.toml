@@ -1,0 +1,49 @@
+baseURL = "https://blog.iliathoughts.com/"
+defaultContentLanguage = "en"
+locale = "en"
+title = "Ilia thoughts"
+
+# FixIt (https://fixit.lruihao.cn), a maintained fork of LoveIt.
+# Theme defaults: themes/FixIt/hugo.toml
+theme = "FixIt"
+
+[params]
+  # FixIt theme version
+  version = "0.4.X"
+  [params.footer]
+    enable = false
+  [params.home]
+    [params.home.profile]
+      enable = true
+      avatarURL = "img/ilia.webp"
+      title = "Ilia thoughts"
+      subtitle = "Thoughts on data analytics, software development, and other things."
+      social = true
+      typeit = false
+  [params.social]
+    GitHub = "bezdomniy"
+    Email = "ilia@iliathoughts.com"
+    Linkedin = "iliachibaev"
+
+[menus]
+  [[menus.main]]
+    identifier = "posts"
+    name = "Posts"
+    url = "/posts/"
+    weight = 1
+  [[menus.main]]
+    identifier = "tags"
+    name = "Tags"
+    url = "/tags/"
+    weight = 2
+  [[menus.main]]
+    identifier = "categories"
+    name = "Categories"
+    url = "/categories/"
+    weight = 3
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      # Posts embed raw HTML/JS (ray tracer and particle demos)
+      unsafe = true

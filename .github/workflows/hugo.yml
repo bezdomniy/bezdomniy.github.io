@@ -25,9 +25,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      # Pinned: the LoveIt theme does not build on newer Hugo releases.
+      # Pinned for reproducible builds; FixIt v0.4.5 needs >= 0.156.0.
       # Keep in sync with mise.toml.
-      HUGO_VERSION: 0.125.3
+      HUGO_VERSION: 0.168.0
     steps:
       - name: Install Hugo
         run: |
