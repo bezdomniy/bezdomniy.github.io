@@ -10,6 +10,8 @@ theme = "FixIt"
 [params]
   # FixIt theme version
   version = "0.4.X"
+  # Content-hashed CSS/JS file names, so Cloudflare never serves stale assets
+  fingerprint = "sha256"
   [params.footer]
     enable = false
   [params.home]
