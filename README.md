@@ -36,10 +36,8 @@ Note: this repo is public, so committed drafts are visible on GitHub (they are n
 
 ## rust_particles app
 
-The app at `/js/rust_particles/` is a prebuilt WASM bundle from
-[rust_particles](https://github.com/bezdomniy/rust_particles):
-
-```sh
-(cd ../rust_particles && trunk build --release)
-scripts/update-rust-particles.sh
-```
+The app at `/rust_particles/` is not part of this repo. It is deployed by
+[rust_particles](https://github.com/bezdomniy/rust_particles)' own GitHub Pages
+workflow on every push to its `main`, and GitHub serves project sites under this
+site's custom domain. `static/js/rust_particles/` only holds a redirect from the
+old URL and a service worker that removes the old cached copy.

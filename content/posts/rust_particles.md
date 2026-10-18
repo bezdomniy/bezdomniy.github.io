@@ -9,5 +9,5 @@ TODO
 
 <!DOCTYPE HTML>
 <html><body>
-<a href="/js/rust_particles/index.html">Load app!</a>
+<a href="/rust_particles/">Load app!</a>
 </body></html>
